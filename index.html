@@ -1,1 +1,57 @@
-<h1>mannen</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PeterHuisma.nl</title>
+    <link href="./output.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <nav class="w-full bg-white shadow-md fixed top-0 left-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="text-2xl font-bold text-indigo-600">
+                    PeterHuisma
+                </div>
+
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium">About</a>
+                    <a href="#projects" class="text-gray-700 hover:text-indigo-600 font-medium">Projects</a>
+                    <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
+                </div>
+
+
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+            <a href="#home" class="block py-2 text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+            <a href="#about" class="block py-2 text-gray-700 hover:text-indigo-600 font-medium">About</a>
+            <a href="#projects" class="block py-2 text-gray-700 hover:text-indigo-600 font-medium">Projects</a>
+            <a href="#contact" class="block py-2 text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
+        </div>
+    </nav>
+
+    <div class="pt-20 px-4">
+        <h1 class="text-3xl font-bold mb-4">Mannen</h1>
+        <p>mannetjes</p>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
