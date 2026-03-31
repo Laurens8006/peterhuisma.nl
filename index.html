@@ -1,124 +1,531 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" class="scroll-smooth">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PETER - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="./src/output.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PETER — Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Bebas Neue"', 'sans-serif'],
+                        mono: ['"DM Mono"', 'monospace'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        :root {
+            --pink: #ff2d78;
+            --pink-glow: rgba(255, 45, 120, .4);
+            --bg: #080808;
+            --card: #111111;
+            --border: rgba(255, 255, 255, 0.07);
+            --muted: #666;
+        }
+
+        body {
+            background: var(--bg);
+            color: #f0f0f0;
+            font-family: 'DM Sans', sans-serif;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        
+        #cur {
+            width: 10px;
+            height: 10px;
+            background: var(--pink);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        #ring {
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--pink);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            opacity: .4;
+            transition: all .18s ease;
+        }
+
+        
+        .vline {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.18);
+        }
+
+        
+        .text-glow {
+            text-shadow: 0 0 30px var(--pink-glow), 0 0 70px var(--pink-glow);
+        }
+
+        .box-glow {
+            box-shadow: 0 0 48px rgba(255, 45, 120, .14);
+        }
+
+        
+        .hr-fade {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 45, 120, .35), transparent);
+        }
+
+        
+        .npill {
+            border-radius: 9999px;
+            transition: background .2s, color .2s;
+        }
+
+        .npill:hover {
+            background: rgba(255, 255, 255, 0.09);
+            color: #fff;
+        }
+
+        
+        .img-wrap {
+            overflow: hidden;
+        }
+
+        .img-wrap img {
+            transition: transform .55s cubic-bezier(.22, 1, .36, 1), filter .55s;
+            filter: brightness(.85) saturate(1.1);
+        }
+
+        .img-wrap:hover img {
+            transform: scale(1.05);
+            filter: brightness(1) saturate(1.3);
+        }
+
+        
+        .btn {
+            display: inline-block;
+            border: 1px solid var(--pink);
+            color: var(--pink);
+            border-radius: 9999px;
+            padding: 12px 30px;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            transition: background .22s, color .22s, box-shadow .22s;
+            cursor: none;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--pink);
+            color: #fff;
+            box-shadow: 0 0 24px rgba(255, 45, 120, .45);
+        }
+
+        
+        .badge {
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 9999px;
+            padding: 4px 14px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: .12em;
+            color: #777;
+            text-transform: uppercase;
+        }
+
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        
+        #mob-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease, opacity .3s ease;
+            opacity: 0;
+        }
+
+        #mob-menu.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        
+        @keyframes scrollDown {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(8px)
+            }
+        }
+
+        .scroll-bounce {
+            animation: scrollDown 1.8s ease-in-out infinite;
+        }
+
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink);
+            border-radius: 2px;
+        }
+    </style>
 </head>
 
-<body class="text-white">
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-90 backdrop-blur-sm">
-        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="text-2xl font-black tracking-wider">PETER</div>
+<body class="relative">
 
-            <div class="hidden md:flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full">
-                <a href="#about" class="nav-pill px-6 py-2 font-bold">ABOUT ME / DESIGNS</a>
-                <a href="#contact" class="nav-pill px-6 py-2 font-bold">TALK TO ME?</a>
+    
+    <div id="cur"></div>
+    <div id="ring"></div>
+
+    
+    <div class="vline" style="left:25%"></div>
+    <div class="vline" style="left:50%"></div>
+    <div class="vline" style="left:75%"></div>
+
+    
+    <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-xl"
+        style="background:rgba(8,8,8,.88);border-bottom:1px solid var(--border)">
+        <nav class="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+
+            
+            <a href="#hero"
+                class="font-display text-2xl tracking-widest text-white hover:opacity-70 transition-opacity">
+                PET<span style="color:var(--pink)">ER</span>
+            </a>
+
+            
+            <div class="hidden md:flex items-center gap-1 p-[5px] rounded-full" style="border:1px solid var(--border)">
+                <a href="#about"
+                    class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 text-gray-500">About</a>
+                <a href="#work"
+                    class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 text-gray-500">Work</a>
+                <a href="#contact"
+                    class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 rounded-full text-white"
+                    style="background:var(--pink)">Contact</a>
             </div>
-            <div class="menu-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
+
+            
+            <button id="ham" class="md:hidden text-white" aria-label="menu">
+                <svg id="ico-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8">
+                    <line x1="3" y1="7" x2="21" y2="7" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="17" x2="21" y2="17" />
                 </svg>
-            </div>
+                <svg id="ico-close" class="hidden" width="26" height="26" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8">
+                    <line x1="4" y1="4" x2="20" y2="20" />
+                    <line x1="20" y1="4" x2="4" y2="20" />
+                </svg>
+            </button>
         </nav>
+
+        
+        <div id="mob-menu" class="md:hidden px-6 pb-5 flex flex-col gap-1" style="border-top:1px solid var(--border)">
+            <a href="#about" class="font-mono text-[11px] tracking-[.14em] uppercase py-4 border-b text-gray-500"
+                style="border-color:var(--border)">About</a>
+            <a href="#work" class="font-mono text-[11px] tracking-[.14em] uppercase py-4 border-b text-gray-500"
+                style="border-color:var(--border)">Work</a>
+            <a href="#contact" class="font-mono text-[11px] tracking-[.14em] uppercase py-4"
+                style="color:var(--pink)">Contact →</a>
+        </div>
     </header>
 
-    <section class="pt-32 pb-16 px-6">
-        <div class="container mx-auto">
-            <div class="flex flex-wrap gap-8 text-xs font-semibold mb-8">
-                <div>
-                    <div class="text-gray-400">DESIGNING</div>
-                </div>
-                <div>
-                    <div class="text-gray-400">FRONTEND WEBDEVELOPER</div>
-                </div>
-                <div class="ml-auto">
-                    <div class="text-gray-400">DATE -</div>
-                    <div>NOVEMBER 2025</div>
-                </div>
-                <div>
-                    <div class="text-gray-400">DESIGNER -</div>
-                    <div>PETER</div>
-                </div>
-                <div>
-                    <div class="text-gray-400">INSTAGRAM -</div>
-                    <div>@ANUSSAPJE</div>
-                </div>
-            </div>
+    
+    <section id="hero" class="relative min-h-screen flex flex-col justify-end pb-24 px-6 md:px-12 overflow-hidden">
 
-            <div class="relative mb-12">
-                <h1 class="text-7xl md:text-9xl font-black tracking-tight leading-none">
-                    HUISMA
-                </h1>
-                <div
-                    class="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 text-pink-500 text-6xl md:text-8xl script-font text-glow font-bold">
-                    PETER
-                </div>
-            </div>
-    </section>
-
-    <section id="artworks" class="px-6 pb-16">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="image-container glow-pink">
-                    <img src="legator.png" alt="Luminescent Architecture" class="w-full h-full object-cover">
-                </div>
-
-                <div class="flex flex-col gap-6">
-                    <div id="about" class="bg-gray-900 bg-opacity-50 p-8 rounded-3xl border border-gray-800">
-                        <h2 class="text-xl font-bold mb-4">ABOUT</h2>
-                        <p class="text-sm leading-relaxed text-gray-300 mb-6">
-                            I’m a designer and frontend developer who loves creating clean, modern, and smooth digital
-                            experiences. I work mainly with HTML, CSS, Tailwind, and JavaScript, and I enjoy turning
-                            ideas into visuals and interactions that feel nice to use. I care a lot about small
-                            details—spacing, balance, colors, animations—because I think those are the things that make
-                            a website feel good.
-
-                            I like designing layouts that are simple but not boring, and coding them in a way that’s
-                            efficient and easy to maintain. Whether it’s a landing page, a personal website, or a small
-                            web app, I try to make everything look neat and clear. I’m always experimenting, learning
-                            new things, and improving my workflow as I go.
-
-                            If you’re into clean design, minimalism, and smooth UI—then we’ll get along just fine.
-                        </p>
-                        <button class="btn-outline text-sm font-semibold w-full">SEE MORE</button>
-                    </div>
-
-                    <div class="image-container glow-pink">
-                        <img src="javascript.png" alt="Neon Interior" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
+        
+        <div class="absolute top-28 right-8 text-right font-mono text-[10px] leading-[2.2] hidden md:block"
+            style="color:var(--muted)">
+            <div><span style="color:var(--pink)">/ /</span> NOV 2025</div>
+            <div>DESIGNING</div>
+            <div>FRONTEND DEV</div>
+            <div>@ANUSSAPJE</div>
         </div>
-    </section>
 
-    <section id="contact" class="px-6 py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-5xl md:text-7xl font-black mb-8">
-                LET'S <span class="text-pink-500 text-glow">CONNECT</span>
-            </h2>
-            <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
-                INTERESTED IN WORKING TOGETHER?
+        
+        <p class="font-mono text-[11px] tracking-[.18em] mb-6" style="color:var(--pink)">001 — INTRO</p>
+
+        
+        <div class="relative select-none">
+            <h1 class="font-display leading-[.88] text-white"
+                style="font-size:clamp(88px,15vw,210px);letter-spacing:-1px">
+                HUIS<span class="outline-text">MA</span>
+            </h1>
+            
+            <span class="text-glow absolute pointer-events-none italic"
+                style="font-family:'Georgia',serif;font-size:clamp(52px,8vw,120px);color:var(--pink);top:26%;left:18%;line-height:1;">
+                Peter
+            </span>
+        </div>
+
+        
+        <div class="mt-12 flex flex-col md:flex-row md:items-end gap-8 justify-between">
+            <p class="max-w-xs text-sm font-light leading-8" style="color:var(--muted)">
+                Designer &amp; frontend developer.<br>
+                Clean interfaces. Sharp details.<br>
+                HTML · CSS · Tailwind · JS
             </p>
-            <button class="btn-outline text-lg font-semibold">GET IN TOUCH</button>
+
+            <div class="flex flex-col items-center gap-3 font-mono text-[10px] tracking-widest"
+                style="color:var(--muted)">
+                <div class="scroll-bounce"
+                    style="width:1px;height:56px;background:linear-gradient(to bottom,var(--pink),transparent)"></div>
+                SCROLL
+            </div>
         </div>
     </section>
 
-    <footer class="px-6 py-8 border-t border-gray-800">
-        <div class="container mx-auto flex flex-wrap justify-between items-center text-sm text-gray-400">
-            <div>© 2025 PETER. All rights reserved.</div>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-pink-500 transition-colors">Instagram</a>
-                <a href="#" class="hover:text-pink-500 transition-colors">Twitter</a>
-                <a href="#" class="hover:text-pink-500 transition-colors">LinkedIn</a>
+    <div class="hr-fade mx-6 md:mx-12"></div>
+
+    
+    <section id="about" class="py-32 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+            
+            <div class="reveal">
+                <p class="font-mono text-[11px] tracking-[.18em] mb-6" style="color:var(--pink)">002 — ABOUT</p>
+                <h2 class="font-display text-6xl md:text-7xl leading-none mb-10">WHO<br>AM I?</h2>
+
+                <div class="space-y-5 text-sm font-light leading-8" style="color:#888;max-width:400px">
+                    <p>I'm a designer and frontend developer who loves creating clean, modern, and smooth digital
+                        experiences. I work mainly with HTML, CSS, Tailwind, and JavaScript.</p>
+                    <p>I care a lot about small details — spacing, balance, colours, animations — because those are the
+                        things that make a website <em>feel</em> good.</p>
+                    <p>If you're into clean design, minimalism, and smooth UI — we'll get along just fine.</p>
+                </div>
+
+                <div class="mt-10 flex flex-wrap gap-2">
+                    <span class="badge">HTML</span>
+                    <span class="badge">CSS</span>
+                    <span class="badge">Tailwind</span>
+                    <span class="badge">JavaScript</span>
+                    <span class="badge">UI Design</span>
+                </div>
+            </div>
+
+            
+            <div class="reveal grid grid-cols-2 gap-4">
+                <div class="p-6 rounded-2xl flex flex-col gap-2"
+                    style="background:var(--card);border:1px solid var(--border)">
+                    <span class="font-display text-5xl" style="color:var(--pink)">3+</span>
+                    <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--muted)">Years
+                        exp.</span>
+                </div>
+                <div class="p-6 rounded-2xl flex flex-col gap-2"
+                    style="background:var(--card);border:1px solid var(--border)">
+                    <span class="font-display text-5xl text-white">20+</span>
+                    <span class="font-mono text-[10px] tracking-widest uppercase"
+                        style="color:var(--muted)">Projects</span>
+                </div>
+                <div class="col-span-2 p-6 rounded-2xl flex items-center justify-between"
+                    style="background:var(--card);border:1px solid rgba(255,45,120,.25)">
+                    <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--muted)">Currently
+                        available</span>
+                    <span class="w-2.5 h-2.5 rounded-full animate-pulse" style="background:var(--pink)"></span>
+                </div>
             </div>
         </div>
+    </section>
+
+    <div class="hr-fade mx-6 md:mx-12"></div>
+
+    
+    <section id="work" class="py-32 px-6 md:px-12">
+        <div class="max-w-6xl mx-auto">
+
+            
+            <div class="reveal flex items-end justify-between mb-16">
+                <div>
+                    <p class="font-mono text-[11px] tracking-[.18em] mb-4" style="color:var(--pink)">003 — WORK</p>
+                    <h2 class="font-display text-6xl md:text-7xl leading-none">SELECTED<br>DESIGNS</h2>
+                </div>
+                <span class="hidden md:block font-mono text-[10px] tracking-widest" style="color:var(--muted)">2024 –
+                    2025</span>
+            </div>
+
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                
+                <div class="reveal img-wrap box-glow rounded-2xl"
+                    style="border:1px solid var(--border);aspect-ratio:4/3">
+                    <img src="legator.png" alt="Legator Design" class="w-full h-full object-cover" />
+                </div>
+
+                
+                <div class="reveal flex flex-col gap-6">
+                    <div class="p-8 rounded-2xl flex-1 flex flex-col justify-between"
+                        style="background:var(--card);border:1px solid var(--border)">
+                        <div>
+                            <span class="badge mb-5 inline-block">UI / Branding</span>
+                            <h3 class="font-display text-4xl mb-4">LEGATOR<br>GUITARS</h3>
+                            <p class="text-sm font-light leading-8" style="color:var(--muted)">
+                                A bold product page redesign for a guitar brand. Heavy typography, dark atmosphere, and
+                                smooth scroll interactions.
+                            </p>
+                        </div>
+                        <a href="#" class="btn mt-6 self-start">View project</a>
+                    </div>
+
+                    <div class="img-wrap rounded-2xl flex-1" style="border:1px solid var(--border);min-height:200px">
+                        <img src="javascript.png" alt="JavaScript Project" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+
+                
+                <div class="reveal md:col-span-2 p-8 md:p-12 rounded-2xl flex flex-col md:flex-row md:items-center gap-8 justify-between"
+                    style="background:var(--card);border:1px solid var(--border)">
+                    <div>
+                        <span class="badge mb-5 inline-block">Frontend Dev</span>
+                        <h3 class="font-display text-4xl mb-3">JAVASCRIPT<br>EXPERIMENTS</h3>
+                        <p class="text-sm font-light leading-8 max-w-md" style="color:var(--muted)">
+                            A collection of interactive JS experiments — canvas animations, scroll effects, and dynamic
+                            UI patterns.
+                        </p>
+                    </div>
+                    <a href="#" class="btn shrink-0 self-start md:self-center">View project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="hr-fade mx-6 md:mx-12"></div>
+
+    
+    <section id="contact" class="py-40 px-6 md:px-12 text-center">
+        <div class="reveal max-w-3xl mx-auto">
+            <p class="font-mono text-[11px] tracking-[.18em] mb-8" style="color:var(--pink)">004 — CONTACT</p>
+            <h2 class="font-display leading-none mb-6" style="font-size:clamp(64px,12vw,160px)">
+                LET'S<br><span class="text-glow" style="color:var(--pink)">TALK</span>
+            </h2>
+            <p class="text-sm font-light mb-12 leading-8" style="color:var(--muted)">
+                Interested in working together, have a project in mind,<br class="hidden md:block">or just want to say
+                hi? My inbox is open.
+            </p>
+            <a href="mailto:peter@example.com" class="btn" style="padding:14px 40px;font-size:12px">Get in touch →</a>
+
+            
+            <div class="mt-20 flex justify-center gap-8 font-mono text-[10px] tracking-widest"
+                style="color:var(--muted)">
+                <a href="#" class="hover:text-white transition-colors" style="text-decoration:none">Instagram</a>
+                <span style="color:#333">·</span>
+                <a href="#" class="hover:text-white transition-colors" style="text-decoration:none">Twitter</a>
+                <span style="color:#333">·</span>
+                <a href="#" class="hover:text-white transition-colors" style="text-decoration:none">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer
+        class="px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] tracking-widest"
+        style="color:#444;border-top:1px solid var(--border)">
+        <span>© 2025 PETER. ALL RIGHTS RESERVED.</span>
+        <span style="color:var(--pink)">@ANUSSAPJE</span>
     </footer>
+
+    
+    <script>
+        const cur = document.getElementById('cur');
+        const ring = document.getElementById('ring');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        (function loop() {
+            rx += (mx - rx) * .12;
+            ry += (my - ry) * .12;
+            cur.style.left = mx + 'px';
+            cur.style.top = my + 'px';
+            ring.style.left = rx + 'px';
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(loop);
+        })();
+
+        const ham = document.getElementById('ham');
+        const mobMenu = document.getElementById('mob-menu');
+        const icoOpen = document.getElementById('ico-open');
+        const icoClose = document.getElementById('ico-close');
+        ham.addEventListener('click', () => {
+            const open = mobMenu.classList.toggle('open');
+            icoOpen.classList.toggle('hidden', open);
+            icoClose.classList.toggle('hidden', !open);
+        });
+        mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            mobMenu.classList.remove('open');
+            icoOpen.classList.remove('hidden');
+            icoClose.classList.add('hidden');
+        }));
+
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        const sections = document.querySelectorAll('section[id]');
+        const navAs = document.querySelectorAll('nav a[href^="#"]');
+        window.addEventListener('scroll', () => {
+            let cur = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) cur = s.id; });
+            navAs.forEach(a => {
+                const isContact = a.getAttribute('href') === '#contact';
+                if (a.getAttribute('href') === '#' + cur && !isContact) {
+                    a.style.background = 'rgba(255,255,255,0.09)';
+                    a.style.color = '#fff';
+                } else if (!isContact) {
+                    a.style.background = '';
+                    a.style.color = '';
+                }
+            });
+        }, { passive: true });
+    </script>
+
 </body>
 
 </html>

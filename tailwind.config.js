@@ -4,7 +4,13 @@ export default {
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                display: ['"Bebas Neue"', 'sans-serif'],
+                mono: ['"DM Mono"', 'monospace'],
+                body: ['"DM Sans"', 'sans-serif'],
+            },
+        },
     },
     plugins: [],
 }
