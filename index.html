@@ -27,8 +27,8 @@
 
     <style>
         :root {
-            --pink: #ff2d78;
-            --pink-glow: rgba(255, 45, 120, .4);
+            --pink: #8b5cf6;
+            --pink-glow: rgba(139, 92, 246, .35);
             --bg: #080808;
             --card: #111111;
             --border: rgba(255, 255, 255, 0.07);
@@ -43,7 +43,6 @@
             overflow-x: hidden;
         }
 
-        
         #cur {
             width: 10px;
             height: 10px;
@@ -68,7 +67,6 @@
             transition: all .18s ease;
         }
 
-        
         .vline {
             position: fixed;
             top: 0;
@@ -79,28 +77,24 @@
             z-index: 0;
         }
 
-        
         .outline-text {
             color: transparent;
             -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.18);
         }
 
-        
         .text-glow {
             text-shadow: 0 0 30px var(--pink-glow), 0 0 70px var(--pink-glow);
         }
 
         .box-glow {
-            box-shadow: 0 0 48px rgba(255, 45, 120, .14);
+            box-shadow: 0 0 48px rgba(139, 92, 246, .14);
         }
 
-        
         .hr-fade {
             height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255, 45, 120, .35), transparent);
+            background: linear-gradient(to right, transparent, rgba(139, 92, 246, .35), transparent);
         }
 
-        
         .npill {
             border-radius: 9999px;
             transition: background .2s, color .2s;
@@ -111,22 +105,6 @@
             color: #fff;
         }
 
-        
-        .img-wrap {
-            overflow: hidden;
-        }
-
-        .img-wrap img {
-            transition: transform .55s cubic-bezier(.22, 1, .36, 1), filter .55s;
-            filter: brightness(.85) saturate(1.1);
-        }
-
-        .img-wrap:hover img {
-            transform: scale(1.05);
-            filter: brightness(1) saturate(1.3);
-        }
-
-        
         .btn {
             display: inline-block;
             border: 1px solid var(--pink);
@@ -145,10 +123,9 @@
         .btn:hover {
             background: var(--pink);
             color: #fff;
-            box-shadow: 0 0 24px rgba(255, 45, 120, .45);
+            box-shadow: 0 0 24px rgba(139, 92, 246, .45);
         }
 
-        
         .badge {
             display: inline-block;
             border: 1px solid rgba(255, 255, 255, .1);
@@ -161,7 +138,6 @@
             text-transform: uppercase;
         }
 
-        
         .reveal {
             opacity: 0;
             transform: translateY(28px);
@@ -173,7 +149,6 @@
             transform: none;
         }
 
-        
         #mob-menu {
             max-height: 0;
             overflow: hidden;
@@ -186,7 +161,6 @@
             opacity: 1;
         }
 
-        
         @keyframes scrollDown {
 
             0%,
@@ -215,32 +189,113 @@
             background: var(--pink);
             border-radius: 2px;
         }
+
+
+        .site-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--card);
+            display: flex;
+            flex-direction: column;
+            transition: border-color .3s, box-shadow .3s;
+        }
+
+        .site-card:hover {
+            border-color: rgba(139, 92, 246, .4);
+            box-shadow: 0 0 40px rgba(139, 92, 246, .12);
+        }
+
+
+        .browser-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+            background: #0d0d0d;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
+        }
+
+        .browser-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .browser-url {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: #555;
+            letter-spacing: .04em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        .iframe-outer {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .iframe-outer iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1280px;
+
+            height: 800px;
+            border: none;
+            transform-origin: top left;
+            transform: scale(var(--scale));
+            pointer-events: none;
+
+        }
+
+
+        .card-link-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            cursor: none;
+        }
+
+
+        .card-info {
+            padding: 16px 20px 20px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 12px;
+        }
     </style>
 </head>
 
 <body class="relative">
 
-    
     <div id="cur"></div>
     <div id="ring"></div>
 
-    
     <div class="vline" style="left:25%"></div>
     <div class="vline" style="left:50%"></div>
     <div class="vline" style="left:75%"></div>
 
-    
+
     <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-xl"
         style="background:rgba(8,8,8,.88);border-bottom:1px solid var(--border)">
         <nav class="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
-
-            
-            <a href="#hero"
-                class="font-display text-2xl tracking-widest text-white hover:opacity-70 transition-opacity">
+            <a href="#" class="font-display text-2xl tracking-widest text-white hover:opacity-70 transition-opacity">
                 PET<span style="color:var(--pink)">ER</span>
             </a>
-
-            
             <div class="hidden md:flex items-center gap-1 p-[5px] rounded-full" style="border:1px solid var(--border)">
                 <a href="#about"
                     class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 text-gray-500">About</a>
@@ -250,8 +305,6 @@
                     class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 rounded-full text-white"
                     style="background:var(--pink)">Contact</a>
             </div>
-
-            
             <button id="ham" class="md:hidden text-white" aria-label="menu">
                 <svg id="ico-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="1.8">
@@ -266,8 +319,6 @@
                 </svg>
             </button>
         </nav>
-
-        
         <div id="mob-menu" class="md:hidden px-6 pb-5 flex flex-col gap-1" style="border-top:1px solid var(--border)">
             <a href="#about" class="font-mono text-[11px] tracking-[.14em] uppercase py-4 border-b text-gray-500"
                 style="border-color:var(--border)">About</a>
@@ -278,42 +329,32 @@
         </div>
     </header>
 
-    
-    <section id="hero" class="relative min-h-screen flex flex-col justify-end pb-24 px-6 md:px-12 overflow-hidden">
 
-        
+    <section id="hero" class="relative min-h-screen flex flex-col justify-end pb-24 px-6 md:px-12 overflow-hidden">
         <div class="absolute top-28 right-8 text-right font-mono text-[10px] leading-[2.2] hidden md:block"
             style="color:var(--muted)">
-            <div><span style="color:var(--pink)">/ /</span> NOV 2025</div>
+            <div><span style="color:var(--pink)">/ /</span> MARCH 2026</div>
             <div>DESIGNING</div>
             <div>FRONTEND DEV</div>
-            <div>@ANUSSAPJE</div>
+            <div>@PXTR_2</div>
         </div>
-
-        
         <p class="font-mono text-[11px] tracking-[.18em] mb-6" style="color:var(--pink)">001 — INTRO</p>
-
-        
         <div class="relative select-none">
             <h1 class="font-display leading-[.88] text-white"
                 style="font-size:clamp(88px,15vw,210px);letter-spacing:-1px">
                 HUIS<span class="outline-text">MA</span>
             </h1>
-            
             <span class="text-glow absolute pointer-events-none italic"
                 style="font-family:'Georgia',serif;font-size:clamp(52px,8vw,120px);color:var(--pink);top:26%;left:18%;line-height:1;">
                 Peter
             </span>
         </div>
-
-        
         <div class="mt-12 flex flex-col md:flex-row md:items-end gap-8 justify-between">
             <p class="max-w-xs text-sm font-light leading-8" style="color:var(--muted)">
                 Designer &amp; frontend developer.<br>
                 Clean interfaces. Sharp details.<br>
-                HTML · CSS · Tailwind · JS
+                HTML · CSS · Tailwind · JS · Figma
             </p>
-
             <div class="flex flex-col items-center gap-3 font-mono text-[10px] tracking-widest"
                 style="color:var(--muted)">
                 <div class="scroll-bounce"
@@ -325,15 +366,12 @@
 
     <div class="hr-fade mx-6 md:mx-12"></div>
 
-    
+
     <section id="about" class="py-32 px-6 md:px-12">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-
-            
             <div class="reveal">
                 <p class="font-mono text-[11px] tracking-[.18em] mb-6" style="color:var(--pink)">002 — ABOUT</p>
                 <h2 class="font-display text-6xl md:text-7xl leading-none mb-10">WHO<br>AM I?</h2>
-
                 <div class="space-y-5 text-sm font-light leading-8" style="color:#888;max-width:400px">
                     <p>I'm a designer and frontend developer who loves creating clean, modern, and smooth digital
                         experiences. I work mainly with HTML, CSS, Tailwind, and JavaScript.</p>
@@ -341,17 +379,15 @@
                         things that make a website <em>feel</em> good.</p>
                     <p>If you're into clean design, minimalism, and smooth UI — we'll get along just fine.</p>
                 </div>
-
                 <div class="mt-10 flex flex-wrap gap-2">
                     <span class="badge">HTML</span>
                     <span class="badge">CSS</span>
                     <span class="badge">Tailwind</span>
                     <span class="badge">JavaScript</span>
                     <span class="badge">UI Design</span>
+                    <span class="badge">Figma</span>
                 </div>
             </div>
-
-            
             <div class="reveal grid grid-cols-2 gap-4">
                 <div class="p-6 rounded-2xl flex flex-col gap-2"
                     style="background:var(--card);border:1px solid var(--border)">
@@ -366,7 +402,7 @@
                         style="color:var(--muted)">Projects</span>
                 </div>
                 <div class="col-span-2 p-6 rounded-2xl flex items-center justify-between"
-                    style="background:var(--card);border:1px solid rgba(255,45,120,.25)">
+                    style="background:var(--card);border:1px solid rgba(139,92,246,.25)">
                     <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--muted)">Currently
                         available</span>
                     <span class="w-2.5 h-2.5 rounded-full animate-pulse" style="background:var(--pink)"></span>
@@ -377,69 +413,117 @@
 
     <div class="hr-fade mx-6 md:mx-12"></div>
 
-    
+
     <section id="work" class="py-32 px-6 md:px-12">
         <div class="max-w-6xl mx-auto">
 
-            
             <div class="reveal flex items-end justify-between mb-16">
                 <div>
                     <p class="font-mono text-[11px] tracking-[.18em] mb-4" style="color:var(--pink)">003 — WORK</p>
-                    <h2 class="font-display text-6xl md:text-7xl leading-none">SELECTED<br>DESIGNS</h2>
+                    <h2 class="font-display text-6xl md:text-7xl leading-none">SELECTED<br>PROJECTS</h2>
                 </div>
-                <span class="hidden md:block font-mono text-[10px] tracking-widest" style="color:var(--muted)">2024 –
-                    2025</span>
+                <span class="hidden md:block font-mono text-[10px] tracking-widest" style="color:var(--muted)">LIVE
+                    SITES</span>
             </div>
 
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                
-                <div class="reveal img-wrap box-glow rounded-2xl"
-                    style="border:1px solid var(--border);aspect-ratio:4/3">
-                    <img src="legator.png" alt="Legator Design" class="w-full h-full object-cover" />
-                </div>
 
-                
-                <div class="reveal flex flex-col gap-6">
-                    <div class="p-8 rounded-2xl flex-1 flex flex-col justify-between"
-                        style="background:var(--card);border:1px solid var(--border)">
+                <div class="reveal md:col-span-2 site-card">
+                    <a href="https://inferno-guitars.netlify.app/" target="_blank" rel="noopener"
+                        class="card-link-overlay"></a>
+
+                    <div class="browser-bar">
+                        <div class="browser-dot" style="background:#ff5f57"></div>
+                        <div class="browser-dot" style="background:#febc2e"></div>
+                        <div class="browser-dot" style="background:#28c840"></div>
+                        <div class="browser-url">inferno-guitars.netlify.app</div>
+                    </div>
+
+                    <div class="iframe-outer" style="height:280px" data-scale-target>
+                        <iframe src="https://inferno-guitars.netlify.app/" loading="lazy"
+                            title="Inferno Guitars"></iframe>
+                    </div>
+
+                    <div class="card-info">
                         <div>
-                            <span class="badge mb-5 inline-block">UI / Branding</span>
-                            <h3 class="font-display text-4xl mb-4">LEGATOR<br>GUITARS</h3>
-                            <p class="text-sm font-light leading-8" style="color:var(--muted)">
-                                A bold product page redesign for a guitar brand. Heavy typography, dark atmosphere, and
-                                smooth scroll interactions.
-                            </p>
+                            <div class="flex gap-2 mb-3">
+                                <span class="badge">UI Design</span>
+                                <span class="badge">E-commerce</span>
+                            </div>
+                            <h3 class="font-display text-3xl text-white">INFERNO GUITARS</h3>
+                            <p class="text-sm font-light mt-1" style="color:var(--muted)">Guitar shop — product pages,
+                                cart & dark atmosphere.</p>
                         </div>
-                        <a href="#" class="btn mt-6 self-start">View project</a>
-                    </div>
-
-                    <div class="img-wrap rounded-2xl flex-1" style="border:1px solid var(--border);min-height:200px">
-                        <img src="javascript.png" alt="JavaScript Project" class="w-full h-full object-cover" />
+                        <a href="https://inferno-guitars.netlify.app/" target="_blank" rel="noopener"
+                            class="btn shrink-0" style="cursor:pointer">Visit →</a>
                     </div>
                 </div>
 
-                
-                <div class="reveal md:col-span-2 p-8 md:p-12 rounded-2xl flex flex-col md:flex-row md:items-center gap-8 justify-between"
-                    style="background:var(--card);border:1px solid var(--border)">
-                    <div>
-                        <span class="badge mb-5 inline-block">Frontend Dev</span>
-                        <h3 class="font-display text-4xl mb-3">JAVASCRIPT<br>EXPERIMENTS</h3>
-                        <p class="text-sm font-light leading-8 max-w-md" style="color:var(--muted)">
-                            A collection of interactive JS experiments — canvas animations, scroll effects, and dynamic
-                            UI patterns.
-                        </p>
+
+                <div class="reveal site-card">
+                    <a href="https://peterhuisma.nl/" target="_blank" rel="noopener" class="card-link-overlay"></a>
+                    <div class="browser-bar">
+                        <div class="browser-dot" style="background:#ff5f57"></div>
+                        <div class="browser-dot" style="background:#febc2e"></div>
+                        <div class="browser-dot" style="background:#28c840"></div>
+                        <div class="browser-url">peterhuisma.nl</div>
                     </div>
-                    <a href="#" class="btn shrink-0 self-start md:self-center">View project</a>
+                    <div class="iframe-outer" data-scale-target>
+                        <iframe src="https://peterhuisma.nl/" loading="lazy" title="Peter Huisma Portfolio"></iframe>
+                    </div>
+                    <div class="card-info">
+                        <div>
+                            <div class="flex gap-2 mb-3">
+                                <span class="badge">Portfolio</span>
+                                <span class="badge">Frontend</span>
+                            </div>
+                            <h3 class="font-display text-3xl text-white">PORTFOLIO V1</h3>
+                            <p class="text-sm font-light mt-1" style="color:var(--muted)">My original personal portfolio
+                                site.</p>
+                        </div>
+                        <a href="https://peterhuisma.nl/" target="_blank" rel="noopener" class="btn shrink-0"
+                            style="cursor:pointer">Visit →</a>
+                    </div>
                 </div>
+
+
+                <div class="reveal site-card">
+                    <a href="https://spelletje.peterhuisma.nl/" target="_blank" rel="noopener"
+                        class="card-link-overlay"></a>
+                    <div class="browser-bar">
+                        <div class="browser-dot" style="background:#ff5f57"></div>
+                        <div class="browser-dot" style="background:#febc2e"></div>
+                        <div class="browser-dot" style="background:#28c840"></div>
+                        <div class="browser-url">spelletje.peterhuisma.nl</div>
+                    </div>
+                    <div class="iframe-outer" data-scale-target>
+                        <iframe src="https://spelletje.peterhuisma.nl/" loading="lazy"
+                            title="Undercover Online"></iframe>
+                    </div>
+                    <div class="card-info">
+                        <div>
+                            <div class="flex gap-2 mb-3">
+                                <span class="badge">Web App</span>
+                                <span class="badge">Game</span>
+                            </div>
+                            <h3 class="font-display text-3xl text-white">UNDERCOVER</h3>
+                            <p class="text-sm font-light mt-1" style="color:var(--muted)">Online multiplayer party game
+                                — rooms, cards & real-time play.</p>
+                        </div>
+                        <a href="https://spelletje.peterhuisma.nl/" target="_blank" rel="noopener" class="btn shrink-0"
+                            style="cursor:pointer">Visit →</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <div class="hr-fade mx-6 md:mx-12"></div>
 
-    
+
     <section id="contact" class="py-40 px-6 md:px-12 text-center">
         <div class="reveal max-w-3xl mx-auto">
             <p class="font-mono text-[11px] tracking-[.18em] mb-8" style="color:var(--pink)">004 — CONTACT</p>
@@ -450,41 +534,37 @@
                 Interested in working together, have a project in mind,<br class="hidden md:block">or just want to say
                 hi? My inbox is open.
             </p>
-            <a href="mailto:peter@example.com" class="btn" style="padding:14px 40px;font-size:12px">Get in touch →</a>
-
-            
+            <a href="mailto:peter@peterhuisma.nl" class="btn"
+                style="padding:14px 40px;font-size:12px;cursor:pointer">Get
+                in touch →</a>
             <div class="mt-20 flex justify-center gap-8 font-mono text-[10px] tracking-widest"
                 style="color:var(--muted)">
-                <a href="#" class="hover:text-white transition-colors" style="text-decoration:none">Instagram</a>
-                <span style="color:#333">·</span>
-                <a href="#" class="hover:text-white transition-colors" style="text-decoration:none">Twitter</a>
-                <span style="color:#333">·</span>
-                <a href="#" class="hover:text-white transition-colors" style="text-decoration:none">LinkedIn</a>
+                <a href="https://www.instagram.com/pxtr_2/" class="hover:text-white transition-colors"
+                    style="text-decoration:none">Instagram</a>
+                <a href="https://www.linkedin.com/in/peter-huisma-335a3339b/" class="hover:text-white transition-colors"
+                    style="text-decoration:none">LinkedIn</a>
             </div>
         </div>
     </section>
 
-    
+
     <footer
         class="px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] tracking-widest"
         style="color:#444;border-top:1px solid var(--border)">
-        <span>© 2025 PETER. ALL RIGHTS RESERVED.</span>
-        <span style="color:var(--pink)">@ANUSSAPJE</span>
+        <span>© 2026 PETER. ALL RIGHTS RESERVED.</span>
+        <span style="color:var(--pink)">@PXTR_2</span>
     </footer>
 
-    
+
     <script>
         const cur = document.getElementById('cur');
         const ring = document.getElementById('ring');
         let mx = 0, my = 0, rx = 0, ry = 0;
         document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
         (function loop() {
-            rx += (mx - rx) * .12;
-            ry += (my - ry) * .12;
-            cur.style.left = mx + 'px';
-            cur.style.top = my + 'px';
-            ring.style.left = rx + 'px';
-            ring.style.top = ry + 'px';
+            rx += (mx - rx) * .12; ry += (my - ry) * .12;
+            cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+            ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
             requestAnimationFrame(loop);
         })();
 
@@ -505,25 +585,37 @@
 
         const revealObs = new IntersectionObserver(entries => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.08 });
         document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
         const sections = document.querySelectorAll('section[id]');
         const navAs = document.querySelectorAll('nav a[href^="#"]');
         window.addEventListener('scroll', () => {
-            let cur = '';
-            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) cur = s.id; });
+            let active = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) active = s.id; });
             navAs.forEach(a => {
                 const isContact = a.getAttribute('href') === '#contact';
-                if (a.getAttribute('href') === '#' + cur && !isContact) {
-                    a.style.background = 'rgba(255,255,255,0.09)';
-                    a.style.color = '#fff';
+                if (a.getAttribute('href') === '#' + active && !isContact) {
+                    a.style.background = 'rgba(255,255,255,0.09)'; a.style.color = '#fff';
                 } else if (!isContact) {
-                    a.style.background = '';
-                    a.style.color = '';
+                    a.style.background = ''; a.style.color = '';
                 }
             });
         }, { passive: true });
+
+        function scaleIframes() {
+            document.querySelectorAll('.iframe-outer[data-scale-target]').forEach(outer => {
+                const containerW = outer.offsetWidth;
+                const scale = containerW / 1280;
+                outer.style.setProperty('--scale', scale);
+                const iframe = outer.querySelector('iframe');
+                if (iframe) {
+                    iframe.style.height = (outer.offsetHeight / scale) + 'px';
+                }
+            });
+        }
+        scaleIframes();
+        window.addEventListener('resize', scaleIframes);
     </script>
 
 </body>
