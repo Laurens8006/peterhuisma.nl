@@ -1,4 +1,36 @@
 User-agent: *
 Allow: /
+Disallow: /admin.php
+Disallow: /data/
+Disallow: /*.json$
+Crawl-delay: 1
+
+Block AI training bots
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
 
 Sitemap: https://peterhuisma.nl/sitemap.xml
