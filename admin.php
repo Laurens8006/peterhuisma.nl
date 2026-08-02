@@ -1,7 +1,10 @@
 <?php
 session_start();
 
-$adminPassword = 'peter2026';
+$adminPassword = getenv('ADMIN_PASSWORD');
+if ($adminPassword === false) {
+    $adminPassword = '';
+}
 $stateFile = __DIR__ . '/data/availability.json';
 $defaultState = [
     'available' => true,
@@ -37,7 +40,7 @@ function writeState($stateFile, $state)
 $state = readState($stateFile, $defaultState);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['password']) || $_POST['password'] !== $adminPassword) {
+    if (!isset($_POST['password']) || trim((string)$_POST['password']) !== trim((string)$adminPassword)) {
         http_response_code(403);
         echo json_encode(['ok' => false, 'message' => 'Onjuiste toegangscode.']);
         exit;
@@ -181,8 +184,6 @@ if (!empty($_SESSION['admin_logged_in'])) {
     </main>
 
     <script>
-        const adminPassword = 'peter2026';
-
         document.getElementById('login-btn')?.addEventListener('click', async () => {
             const password = document.getElementById('password-input').value;
             const error = document.getElementById('login-error');
@@ -206,7 +207,6 @@ if (!empty($_SESSION['admin_logged_in'])) {
 
         document.getElementById('save-btn')?.addEventListener('click', async () => {
             const payload = new URLSearchParams({
-                password: adminPassword,
                 action: 'save',
                 available: document.getElementById('available-toggle').checked ? '1' : '0',
                 heading: document.getElementById('heading-input').value,
