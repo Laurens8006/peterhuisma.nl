@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$dbHost = getenv('DB_HOST') ?: '127.0.0.1';
-$dbName = getenv('DB_NAME') ?: 'site_admin';
-$dbUser = getenv('DB_USER') ?: 'root';
-$dbPass = getenv('DB_PASS') ?: '';
+$dbHost = getenv('DB_HOST') ?: 'X';
+$dbName = getenv('DB_NAME') ?: 'X';
+$dbUser = getenv('DB_USER') ?: 'X';
+$dbPass = getenv('DB_PASS') ?: 'X';
 $stateFile = __DIR__ . '/data/availability.json';
 $defaultState = [
     'available' => true,
@@ -63,7 +63,13 @@ function validateAdminCredentials($username, $password)
 }
 
 $state = readState($stateFile, $defaultState);
+if (isset($_GET['state'])) {
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 
+    echo json_encode($state, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
