@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-$adminPassword = getenv('ADMIN_PASSWORD');
-if ($adminPassword === false) {
-    $adminPassword = '';
-}
+$dbHost = getenv('DB_HOST') ?: '127.0.0.1';
+$dbName = getenv('DB_NAME') ?: 'site_admin';
+$dbUser = getenv('DB_USER') ?: 'root';
+$dbPass = getenv('DB_PASS') ?: '';
 $stateFile = __DIR__ . '/data/availability.json';
 $defaultState = [
     'available' => true,
@@ -37,19 +37,48 @@ function writeState($stateFile, $state)
     file_put_contents($stateFile, json_encode($state, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 }
 
+function getDbConnection()
+{
+    global $dbHost, $dbName, $dbUser, $dbPass;
+
+    $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $dbHost, $dbName);
+    return new PDO($dsn, $dbUser, $dbPass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]);
+}
+
+function validateAdminCredentials($username, $password)
+{
+    try {
+        $pdo = getDbConnection();
+        $stmt = $pdo->prepare('SELECT password_hash FROM admins WHERE username = :username LIMIT 1');
+        $stmt->execute(['username' => $username]);
+        $user = $stmt->fetch();
+
+        return $user && password_verify($password, $user['password_hash']);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
 $state = readState($stateFile, $defaultState);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['password']) || trim((string)$_POST['password']) !== trim((string)$adminPassword)) {
-        http_response_code(403);
-        echo json_encode(['ok' => false, 'message' => 'Onjuiste toegangscode.']);
-        exit;
-    }
-
     $action = $_POST['action'] ?? '';
 
     if ($action === 'login') {
+        $username = trim((string)($_POST['username'] ?? ''));
+        $password = trim((string)($_POST['password'] ?? ''));
+
+        if ($username === '' || $password === '' || !validateAdminCredentials($username, $password)) {
+            http_response_code(403);
+            echo json_encode(['ok' => false, 'message' => 'Onjuiste gebruikersnaam of wachtwoord.']);
+            exit;
+        }
+
         $_SESSION['admin_logged_in'] = true;
+        $_SESSION['admin_username'] = $username;
         echo json_encode(['ok' => true]);
         exit;
     }
@@ -141,8 +170,12 @@ if (!empty($_SESSION['admin_logged_in'])) {
                 <h1 class="text-3xl md:text-4xl font-semibold mb-4">Log in</h1>
                 <p class="text-sm text-gray-400 mb-6">Voer de toegangscode in om de beschikbaarheidsinstellingen te bewerken.</p>
                 <label class="block">
-                    <span class="text-sm text-gray-400">Toegangscode</span>
-                    <input id="password-input" type="password" class="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white" placeholder="Typ de code" />
+                    <span class="text-sm text-gray-400">Gebruikersnaam</span>
+                    <input id="username-input" type="text" class="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white" placeholder="Typ je gebruikersnaam" />
+                </label>
+                <label class="block">
+                    <span class="text-sm text-gray-400">Wachtwoord</span>
+                    <input id="password-input" type="password" class="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white" placeholder="Typ je wachtwoord" />
                 </label>
                 <div class="mt-6 flex flex-wrap gap-3">
                     <button id="login-btn" class="btn">Inloggen</button>
@@ -185,6 +218,7 @@ if (!empty($_SESSION['admin_logged_in'])) {
 
     <script>
         document.getElementById('login-btn')?.addEventListener('click', async () => {
+            const username = document.getElementById('username-input').value;
             const password = document.getElementById('password-input').value;
             const error = document.getElementById('login-error');
             const res = await fetch(window.location.href, {
@@ -193,6 +227,7 @@ if (!empty($_SESSION['admin_logged_in'])) {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: new URLSearchParams({
+                    username,
                     password,
                     action: 'login'
                 })
