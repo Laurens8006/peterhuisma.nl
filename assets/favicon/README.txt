@@ -1,0 +1,1 @@
+Favicon assets removed; no favicon links remain in the site.

@@ -4,7 +4,32 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PETER — Portfolio</title>
+    <meta name="description"
+        content="Peter Huisma is een freelance designer en frontend developer uit Nederland. Ik ontwerp en bouw moderne portfolio- en zakelijke websites met een premium uitstraling, sterke UX en snelle prestaties." />
+    <meta name="keywords"
+        content="Peter Huisma, portfolio website, zakelijke website, webdesign Nederland, frontend developer, website laten maken, premium website, freelance webdesigner, website ontwerpen, HTML CSS Tailwind JavaScript" />
+    <meta name="author" content="Peter Huisma" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#080808" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="google-site-verification" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Peter Huisma" />
+    <meta property="og:title"
+        content="Peter Huisma | Designer & Frontend Developer | Portfolio- en zakelijke websites" />
+    <meta property="og:description"
+        content="Professionele portfolio- en zakelijke websites met een moderne uitstraling, sterke UX en snelle prestaties. Beschikbaar voor freelance-opdrachten in Nederland." />
+    <meta property="og:url" content="https://peterhuisma.nl/" />
+    <meta property="og:image" content="https://peterhuisma.nl/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Peter Huisma | Designer & Frontend Developer" />
+    <meta name="twitter:description"
+        content="Professionele portfolio- en zakelijke websites met een moderne uitstraling, sterke UX en snelle prestaties. Beschikbaar voor freelance-opdrachten." />
+    <meta name="twitter:image" content="https://peterhuisma.nl/og-image.svg" />
+    <link rel="canonical" href="https://peterhuisma.nl/" />
+    <link rel="alternate" hreflang="nl" href="https://peterhuisma.nl/" />
+    <meta property="og:locale" content="nl_NL" />
+    <title>Peter Huisma | Designer & Frontend Developer | Portfolio- en zakelijke websites</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,6 +47,20 @@
                     },
                 },
             },
+        }
+    </script>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Peter Huisma",
+            "jobTitle": "Designer & Frontend Developer",
+            "url": "https://peterhuisma.nl/",
+            "description": "Designer en frontend developer die moderne portfolio- en zakelijke websites bouwt met een premium uitstraling en sterke gebruikerservaring.",
+            "sameAs": [
+                "https://www.linkedin.com/in/peter-huisma-335a3339b/"
+            ]
         }
     </script>
 
@@ -69,8 +108,9 @@
             pointer-events: none;
             z-index: 9998;
             transform: translate(-50%, -50%);
-            opacity: .4;
-            transition: all .18s ease;
+            opacity: .55;
+            transition: width .2s ease, height .2s ease, opacity .2s ease, border-color .2s ease;
+            box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.08);
         }
 
         .vline {
@@ -81,6 +121,18 @@
             background: rgba(255, 255, 255, 0.03);
             pointer-events: none;
             z-index: 0;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .outline-text {
@@ -121,8 +173,8 @@
             font-size: 11px;
             letter-spacing: .15em;
             text-transform: uppercase;
-            transition: background .22s, color .22s, box-shadow .22s;
-            cursor: none;
+            transition: background .22s, color .22s, box-shadow .22s, transform .22s;
+            cursor: pointer;
             text-decoration: none;
         }
 
@@ -196,7 +248,6 @@
             border-radius: 2px;
         }
 
-
         .site-card {
             position: relative;
             border-radius: 16px;
@@ -205,14 +256,225 @@
             background: var(--card);
             display: flex;
             flex-direction: column;
-            transition: border-color .3s, box-shadow .3s;
+            transition: border-color .3s, box-shadow .3s, transform .3s;
         }
 
         .site-card:hover {
-            border-color: rgba(139, 92, 246, .4);
-            box-shadow: 0 0 40px rgba(139, 92, 246, .12);
+            border-color: rgba(139, 92, 246, .45);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, .25);
+            transform: translateY(-6px) scale(1.01);
         }
 
+        .site-card:hover .browser-bar {
+            background: rgba(15, 15, 15, .95);
+        }
+
+        .site-card:hover .iframe-outer iframe {
+            filter: saturate(1.08) brightness(1.04);
+        }
+
+        .card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .hero-pill {
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 9999px;
+            padding: 10px 16px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            transition: transform .22s, color .22s, border-color .22s;
+        }
+
+        .hero-pill:hover {
+            transform: translateY(-2px);
+            color: #fff;
+            border-color: rgba(139, 92, 246, .35);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, .16);
+            color: rgba(255, 255, 255, .8);
+            background: rgba(255, 255, 255, .03);
+            border-radius: 9999px;
+            padding: 12px 26px;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            transition: background .22s, color .22s, border-color .22s, box-shadow .22s, transform .22s;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            #cur,
+            #ring {
+                display: none !important;
+            }
+
+            .site-card {
+                min-height: auto;
+            }
+
+            .card-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .card-actions {
+                justify-content: flex-start;
+                width: 100%;
+            }
+
+            .btn,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-pill {
+                font-size: 9px;
+                padding: 8px 12px;
+            }
+
+            .browser-bar {
+                padding: 10px 12px;
+            }
+
+            .browser-url {
+                font-size: 9px;
+            }
+
+            .iframe-outer {
+                height: 240px;
+            }
+
+            .site-card:hover {
+                transform: none;
+            }
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, .12);
+            color: #fff;
+            border-color: rgba(255, 255, 255, .28);
+            box-shadow: 0 0 24px rgba(139, 92, 246, .18);
+        }
+
+        .availability-card {
+            transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+        }
+
+        .availability-card.available {
+            border-color: rgba(34, 197, 94, .35);
+            box-shadow: inset 0 0 0 1px rgba(34, 197, 94, .12);
+            background: rgba(34, 197, 94, .06);
+        }
+
+        .availability-card.available #availability-dot {
+            background: #22c55e;
+        }
+
+        .availability-card.available #availability-label {
+            color: #4ade80;
+        }
+
+        .availability-card.available #availability-heading {
+            color: #f2fff3;
+        }
+
+        .availability-card.unavailable {
+            border-color: rgba(248, 113, 113, .35);
+            box-shadow: inset 0 0 0 1px rgba(248, 113, 113, .12);
+            background: rgba(248, 113, 113, .06);
+        }
+
+        .availability-card.unavailable #availability-dot {
+            background: #ef4444;
+        }
+
+        .availability-card.unavailable #availability-label {
+            color: #f87171;
+        }
+
+        .availability-card.unavailable #availability-heading {
+            color: #fff2f2;
+        }
+
+        .availability-card.unavailable #availability-description {
+            color: #f5c2c2;
+        }
+
+        .pricing-option {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .pricing-option-label {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 9999px;
+            padding: 10px 16px;
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #bbb;
+            transition: all .22s ease;
+        }
+
+        .pricing-option input:checked+.pricing-option-label {
+            background: var(--pink);
+            color: #fff;
+            border-color: var(--pink);
+            box-shadow: 0 0 24px rgba(139, 92, 246, .24);
+        }
+
+        .pricing-card-wrapper {
+            position: relative;
+            min-height: 420px;
+        }
+
+        .pricing-card-group {
+            position: absolute;
+            inset: 0;
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease;
+        }
+
+        .pricing-card-group.is-active {
+            display: grid;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
 
         .browser-bar {
             display: flex;
@@ -287,6 +549,7 @@
 </head>
 
 <body class="relative">
+    <a href="#main-content" class="sr-only focus:not-sr-only">Skip to content</a>
 
     <div id="cur"></div>
     <div id="ring"></div>
@@ -298,20 +561,22 @@
 
     <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-xl"
         style="background:rgba(8,8,8,.88);border-bottom:1px solid var(--border)">
-        <nav class="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+        <nav class="max-w-6xl mx-auto px-6 md:px-10 py-4 flex items-center justify-between"
+            aria-label="Primary navigation">
             <a href="#" class="font-display text-2xl tracking-widest text-white hover:opacity-70 transition-opacity">
                 PET<span style="color:var(--pink)">ER</span>
             </a>
             <div class="hidden md:flex items-center gap-1 p-[5px] rounded-full" style="border:1px solid var(--border)">
                 <a href="#about"
-                    class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 text-gray-500">About</a>
+                    class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 text-gray-500">Over mij</a>
                 <a href="#work"
-                    class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 text-gray-500">Work</a>
+                    class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 text-gray-500">Werk</a>
                 <a href="#contact"
                     class="npill font-mono text-[11px] tracking-[.12em] uppercase px-5 py-2 rounded-full text-white"
                     style="background:var(--pink)">Contact</a>
             </div>
-            <button id="ham" class="md:hidden text-white" aria-label="menu">
+            <button id="ham" class="md:hidden text-white" aria-label="Open navigatiemenu" aria-expanded="false"
+                aria-controls="mob-menu">
                 <svg id="ico-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="1.8">
                     <line x1="3" y1="7" x2="21" y2="7" />
@@ -327,254 +592,397 @@
         </nav>
         <div id="mob-menu" class="md:hidden px-6 pb-5 flex flex-col gap-1" style="border-top:1px solid var(--border)">
             <a href="#about" class="font-mono text-[11px] tracking-[.14em] uppercase py-4 border-b text-gray-500"
-                style="border-color:var(--border)">About</a>
+                style="border-color:var(--border)">Over mij</a>
             <a href="#work" class="font-mono text-[11px] tracking-[.14em] uppercase py-4 border-b text-gray-500"
-                style="border-color:var(--border)">Work</a>
+                style="border-color:var(--border)">Werk</a>
             <a href="#contact" class="font-mono text-[11px] tracking-[.14em] uppercase py-4"
                 style="color:var(--pink)">Contact →</a>
         </div>
     </header>
 
 
-    <section id="hero" class="relative min-h-screen flex flex-col justify-end pb-24 px-6 md:px-12 overflow-hidden">
-        <div class="absolute top-28 right-8 text-right font-mono text-[10px] leading-[2.2] hidden md:block"
-            style="color:var(--muted)">
-            <div><span style="color:var(--pink)">/ /</span> MARCH 2026</div>
-            <div>DESIGNING</div>
-            <div>FRONTEND DEV</div>
-            <div>@PXTR_2</div>
-        </div>
-        <p class="font-mono text-[11px] tracking-[.18em] mb-6" style="color:var(--pink)">001 — INTRO</p>
-        <div class="relative select-none">
-            <h1 class="font-display leading-[.88] text-white"
-                style="font-size:clamp(88px,15vw,210px);letter-spacing:-1px">
-                HUIS<span class="outline-text">MA</span>
-            </h1>
-            <span class="text-glow absolute pointer-events-none italic"
-                style="font-family:'Georgia',serif;font-size:clamp(52px,8vw,120px);color:var(--pink);top:26%;left:18%;line-height:1;">
-                Peter
-            </span>
-        </div>
-        <div class="mt-12 flex flex-col md:flex-row md:items-end gap-8 justify-between">
-            <p class="max-w-xs text-sm font-light leading-8" style="color:var(--muted)">
-                Designer &amp; frontend developer.<br>
-                Clean interfaces. Sharp details.<br>
-                HTML · CSS · Tailwind · JS · Figma
-            </p>
-            <div class="flex flex-col items-center gap-3 font-mono text-[10px] tracking-widest"
+    <main id="main-content">
+        <section id="hero"
+            class="relative min-h-screen flex flex-col justify-end pt-24 pb-24 px-6 md:px-12 overflow-hidden">
+            <div class="absolute top-28 right-8 text-right font-mono text-[10px] leading-[2.2] hidden md:block"
                 style="color:var(--muted)">
-                <div class="scroll-bounce"
-                    style="width:1px;height:56px;background:linear-gradient(to bottom,var(--pink),transparent)"></div>
-                SCROLL
+                <div><span style="color:var(--pink)">/ /</span> JULI 2026</div>
+                <div>DESIGN</div>
+                <div>FRONTEND</div>
             </div>
-        </div>
-    </section>
-
-    <div class="hr-fade mx-6 md:mx-12"></div>
-
-
-    <section id="about" class="py-32 px-6 md:px-12">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div class="reveal">
-                <p class="font-mono text-[11px] tracking-[.18em] mb-6" style="color:var(--pink)">002 — ABOUT</p>
-                <h2 class="font-display text-6xl md:text-7xl leading-none mb-10">WHO<br>AM I?</h2>
-                <div class="space-y-5 text-sm font-light leading-8" style="color:#888;max-width:400px">
-                    <p>I'm a designer and frontend developer who loves creating clean, modern, and smooth digital
-                        experiences. I work mainly with HTML, CSS, Tailwind, and JavaScript.</p>
-                    <p>I care a lot about small details, s p a c i n g, balance, <em style="color:var(--red)">c</em><em
-                            style="color:var(--orange)">o</em><em style="color:var(--yellow)">l</em><em
-                            style="color:var(--green)">o</em><em style="color:var(--blue)">u</em><em
-                            style="color:var(--pink)">r</em><em style="color:var(--violet)">s</em>, animations, because
-                        those are the
-                        things that make a website <em style="color:var(--pink)">feel good.</em></p>
-                    <p>If you're into clean design, minimalism, and smooth UI — we'll get along just fine.</p>
-                </div>
-                <div class="mt-10 flex flex-wrap gap-2">
-                    <span class="badge">HTML</span>
-                    <span class="badge">CSS</span>
-                    <span class="badge">Tailwind</span>
-                    <span class="badge">JavaScript</span>
-                    <span class="badge">UI Design</span>
-                    <span class="badge">Figma</span>
-                </div>
+            <p class="font-mono text-[11px] tracking-[.18em] mb-6" style="color:var(--pink)">001 — INTRO</p>
+            <div class="relative select-none">
+                <h1 class="font-display leading-[.88] text-white"
+                    style="font-size:clamp(88px,15vw,210px);letter-spacing:-1px">
+                    HUIS<span class="outline-text">MA</span>
+                </h1>
+                <p class="sr-only">Peter Huisma maakt portfolio- en zakelijke websites in Nederland met een premium
+                    uitstraling en sterke gebruikerservaring.</p>
+                <span class="text-glow absolute pointer-events-none italic"
+                    style="font-family:'Georgia',serif;font-size:clamp(52px,8vw,120px);color:var(--pink);top:26%;left:18%;line-height:1;">
+                    Peter
+                </span>
             </div>
-            <div class="reveal grid grid-cols-2 gap-4">
-                <div class="p-6 rounded-2xl flex flex-col gap-2"
-                    style="background:var(--card);border:1px solid var(--border)">
-                    <span class="font-display text-5xl" style="color:var(--pink)">1.5+</span>
-                    <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--muted)">Years
-                        exp.</span>
-                </div>
-                <div class="p-6 rounded-2xl flex flex-col gap-2"
-                    style="background:var(--card);border:1px solid var(--border)">
-                    <span class="font-display text-5xl text-white">5+</span>
-                    <span class="font-mono text-[10px] tracking-widest uppercase"
-                        style="color:var(--muted)">Projects</span>
-                </div>
-                <div class="col-span-2 p-6 rounded-2xl flex items-center justify-between"
-                    style="background:var(--card);border:1px solid rgba(139,92,246,.25)">
-                    <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--muted)">Currently
-                        available</span>
-                    <span class="w-2.5 h-2.5 rounded-full animate-pulse" style="background:var(--pink)"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="hr-fade mx-6 md:mx-12"></div>
-
-
-    <section id="work" class="py-32 px-6 md:px-12">
-        <div class="max-w-6xl mx-auto">
-
-            <div class="reveal flex items-end justify-between mb-16">
+            <div class="mt-12 flex flex-col md:flex-row md:items-end gap-8 justify-between">
                 <div>
-                    <p class="font-mono text-[11px] tracking-[.18em] mb-4" style="color:var(--pink)">003 — WORK</p>
-                    <h2 class="font-display text-6xl md:text-7xl leading-none">SELECTED<br>PROJECTS</h2>
+                    <p class="max-w-xs text-sm font-light leading-8" style="color:var(--muted)">
+                        Designer &amp; frontend developer.<br>
+                        Schone interfaces. Strakke details.<br>
+                        HTML · CSS · Tailwind · JavaScript · Figma
+                    </p>
+                    <p class="mt-5 text-sm font-light leading-7" style="color:#888;max-width:360px">
+                        Portfoliowebsites, landingspagina's en creatieve branding met een premium uitstraling en snelle
+                        prestaties.
+                    </p>
+                    <div class="mt-5 flex flex-wrap gap-3" style="color:#aaa;max-width:360px">
+                        <span class="badge" style="border-color:rgba(255,255,255,.08);color:#bbb">Snelle laadtijd</span>
+                        <span class="badge" style="border-color:rgba(255,255,255,.08);color:#bbb">Premium
+                            uitstraling</span>
+                        <span class="badge" style="border-color:rgba(255,255,255,.08);color:#bbb">Sterke UX</span>
+                    </div>
                 </div>
-                <span class="hidden md:block font-mono text-[10px] tracking-widest" style="color:var(--muted)">LIVE
-                    SITES</span>
+                <div class="flex flex-col items-center gap-3 font-mono text-[10px] tracking-widest"
+                    style="color:var(--muted)">
+                    <div class="scroll-bounce"
+                        style="width:1px;height:56px;background:linear-gradient(to bottom,var(--pink),transparent)">
+                    </div>
+                    SCROLL DOWN
+                </div>
             </div>
+        </section>
+
+        <div class="hr-fade mx-6 md:mx-12"></div>
 
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-
-                <div class="reveal md:col-span-2 site-card">
-                    <a href="https://inferno-guitars.netlify.app/" target="_blank" rel="noopener"
-                        class="card-link-overlay"></a>
-
-                    <div class="browser-bar">
-                        <div class="browser-dot" style="background:#ff5f57"></div>
-                        <div class="browser-dot" style="background:#febc2e"></div>
-                        <div class="browser-dot" style="background:#28c840"></div>
-                        <div class="browser-url">inferno-guitars.netlify.app</div>
+        <section id="about" class="py-32 px-6 md:px-12">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="font-mono text-[11px] tracking-[.18em] mb-6" style="color:var(--pink)">002 — OVER MIJ</p>
+                    <h2 class="font-display text-6xl md:text-7xl leading-none mb-10">WIE<br>BEN IK?</h2>
+                    <div class="space-y-5 text-sm font-light leading-8" style="color:#888;max-width:400px">
+                        <p>Ik ben Peter, een 18-jarige designer en frontend developer die moderne, schone en vloeiende
+                            digitale ervaringen creëert. Ik maak professionele portfolio- en zakelijke websites,
+                            voornamelijk met HTML, CSS, Tailwind en JavaScript.</p>
+                        <p>Ik geef veel aandacht aan kleine details, ruimte, balans, <em
+                                style="color:var(--red)">k</em><em style="color:var(--orange)">l</em><em
+                                style="color:var(--yellow)">e</em><em style="color:var(--green)">u</em><em
+                                style="color:var(--blue)">r</em><em style="color:var(--pink)">e</em><em
+                                style="color:var(--violet)">n</em> en animaties, omdat juist die elementen een website
+                            <em style="color:var(--pink)">goed laten voelen en laten opvallen.</em>
+                        </p>
+                        <p>Als jij houdt van clean design, minimalisme en een vloeiende gebruikerservaring, dan past dat
+                            perfect bij mij.</p>
                     </div>
-
-                    <div class="iframe-outer" style="height:280px" data-scale-target>
-                        <iframe src="https://inferno-guitars.netlify.app/" loading="lazy"
-                            title="Inferno Guitars"></iframe>
+                    <div class="mt-10 flex flex-wrap gap-2">
+                        <span class="badge">HTML</span>
+                        <span class="badge">CSS</span>
+                        <span class="badge">Tailwind</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">UI Design</span>
+                        <span class="badge">Figma</span>
                     </div>
-
-                    <div class="card-info">
+                </div>
+                <div class="reveal grid grid-cols-2 gap-4">
+                    <div class="p-6 rounded-2xl flex flex-col gap-2"
+                        style="background:var(--card);border:1px solid var(--border)">
+                        <span class="font-display text-5xl" style="color:var(--pink)">2+</span>
+                        <span class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--muted)">Jaren
+                            ervaring</span>
+                    </div>
+                    <div class="p-6 rounded-2xl flex flex-col gap-2"
+                        style="background:var(--card);border:1px solid var(--border)">
+                        <span class="font-display text-5xl text-white">5+</span>
+                        <span class="font-mono text-[10px] tracking-widest uppercase"
+                            style="color:var(--muted)">Projecten</span>
+                    </div>
+                    <div id="availability-card"
+                        class="availability-card available col-span-2 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+                        style="background:var(--card);border:1px solid rgba(139,92,246,.25)">
                         <div>
-                            <div class="flex gap-2 mb-3">
-                                <span class="badge">UI Design</span>
-                                <span class="badge">E-commerce</span>
-                            </div>
-                            <h3 class="font-display text-3xl text-white">INFERNO GUITARS</h3>
-                            <p class="text-sm font-light mt-1" style="color:var(--muted)">Guitar shop — product pages,
-                                cart & dark atmosphere.</p>
+                            <span id="availability-heading" class="font-mono text-[10px] tracking-widest uppercase"
+                                style="color:var(--muted)">Beschikbaar voor nieuwe projecten</span>
+                            <p id="availability-description" class="mt-2 text-sm font-light" style="color:#aaa">Open
+                                voor freelance-opdrachten, portfolio's en moderne zakelijke websites.</p>
                         </div>
-                        <a href="https://inferno-guitars.netlify.app/" target="_blank" rel="noopener"
-                            class="btn shrink-0" style="cursor:pointer">Visit →</a>
+                        <div class="flex items-center gap-2">
+                            <span id="availability-dot" class="w-2.5 h-2.5 rounded-full animate-pulse"
+                                style="background:var(--pink)"></span>
+                            <span id="availability-label" class="font-mono text-[10px] tracking-widest uppercase">Nu
+                                beschikbaar</span>
+                        </div>
                     </div>
                 </div>
 
+                <div class="md:col-span-2 mt-14 pt-10 border-t" style="border-color:rgba(255,255,255,.06)">
+                    <div class="reveal">
+                        <p class="font-mono text-[11px] tracking-[.18em] mb-4" style="color:var(--pink)">003 — WAT IK
+                            BOUW
+                        </p>
+                        <h3 class="font-display text-4xl md:text-5xl leading-none mb-5">WEBSITES MET EEN
+                            PREMIUM-LOOK
+                        </h3>
+                        <p class="max-w-2xl text-sm font-light leading-8" style="color:#888">
+                            Ik maak moderne portfoliowebsites en zakelijke websites met een sterke visuele identiteit,
+                            een
+                            heldere structuur en een stijl die past bij jouw persoonlijke merk of bedrijf. Of je nu een
+                            persoonlijke showcase nodig hebt of een professionele online aanwezigheid voor je
+                            onderneming,
+                            alles wordt gebouwd met aandacht voor sfeer, snelheid en een sterke eerste indruk.
+                        </p>
+                    </div>
 
-                <div class="reveal site-card">
-                    <a href="https://peterhuisma.nl/" target="_blank" rel="noopener" class="card-link-overlay"></a>
-                    <div class="browser-bar">
-                        <div class="browser-dot" style="background:#ff5f57"></div>
-                        <div class="browser-dot" style="background:#febc2e"></div>
-                        <div class="browser-dot" style="background:#28c840"></div>
-                        <div class="browser-url">peterhuisma.nl</div>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <label class="pricing-option">
+                            <input type="radio" name="website-type" value="portfolio" class="sr-only" checked>
+                            <span class="pricing-option-label">Portfolio &amp; ZZP</span>
+                        </label>
+                        <label class="pricing-option">
+                            <input type="radio" name="website-type" value="business" class="sr-only">
+                            <span class="pricing-option-label">Bedrijf</span>
+                        </label>
                     </div>
-                    <div class="iframe-outer" data-scale-target>
-                        <iframe src="https://peterhuisma.nl/" loading="lazy" title="Peter Huisma Portfolio"></iframe>
-                    </div>
-                    <div class="card-info">
-                        <div>
-                            <div class="flex gap-2 mb-3">
-                                <span class="badge">Portfolio</span>
-                                <span class="badge">Frontend</span>
+
+                    <div class="pricing-card-wrapper mt-8">
+                        <div id="pricing-portfolio"
+                            class="pricing-card-group is-active grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="reveal site-card p-8 rounded-3xl min-h-[340px] h-full"
+                                style="background:var(--card);border:1px solid var(--border)">
+                                <div class="inline-flex items-center rounded-full px-3 py-1 mb-4 border text-[10px] font-mono uppercase tracking-[.18em]"
+                                    style="color:var(--pink);border-color:rgba(139,92,246,.3)">Klaar voor lancering
+                                </div>
+                                <p class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--pink)">
+                                    Starter
+                                </p>
+                                <div class="font-display text-4xl mt-3 text-white">€400,-</div>
+                                <p class="text-sm font-light mt-3 leading-7" style="color:#888">Een strakke
+                                    één-pagina portfolio met een sterke intro, voorbeeldwerk en een duidelijke
+                                    contactsectie.</p>
+                                <ul class="mt-4 space-y-2 text-sm" style="color:#aaa">
+                                    <li>• 1 pagina</li>
+                                    <li>• Responsive ontwerp</li>
+                                    <li>• Contactsectie</li>
+                                </ul>
+                                <div class="mt-6 card-actions">
+                                    <a href="mailto:peter@peterhuisma.nl" class="btn-secondary">Contact →</a>
+                                </div>
                             </div>
-                            <h3 class="font-display text-3xl text-white">PORTFOLIO V1</h3>
-                            <p class="text-sm font-light mt-1" style="color:var(--muted)">My original personal portfolio
-                                site.</p>
+
+                            <div class="reveal site-card p-8 rounded-3xl min-h-[340px] md:scale-[1.03] md:-translate-y-1"
+                                style="background:var(--card);border:1px solid rgba(139,92,246,.35);box-shadow:0 0 40px rgba(139,92,246,.12)">
+                                <div class="inline-flex items-center rounded-full px-3 py-1 mb-4 border text-[10px] font-mono uppercase tracking-[.18em]"
+                                    style="color:var(--pink);border-color:rgba(139,92,246,.3)">Meest gekozen</div>
+                                <p class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--pink)">
+                                    Growth
+                                </p>
+                                <div class="font-display text-5xl mt-3 text-white">€600,-</div>
+                                <p class="text-sm font-light mt-3 leading-7" style="color:#888">Een complete portfolio
+                                    met meerdere secties, verfijnde animaties en een premium uitstraling die
+                                    professioneel en soepel aanvoelt.</p>
+                                <ul class="mt-4 space-y-2 text-sm" style="color:#aaa">
+                                    <li>• 3–5 pagina's</li>
+                                    <li>• SEO en snelle laadtijd</li>
+                                    <li>• Contactsectie</li>
+                                </ul>
+                                <div class="mt-6 card-actions">
+                                    <a href="mailto:peter@peterhuisma.nl" class="btn-secondary">Contact →</a>
+                                </div>
+                            </div>
                         </div>
-                        <a href="https://peterhuisma.nl/" target="_blank" rel="noopener" class="btn shrink-0"
-                            style="cursor:pointer">Visit →</a>
+
+                        <div id="pricing-business" class="pricing-card-group grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="reveal site-card p-8 rounded-3xl min-h-[340px] h-full"
+                                style="background:var(--card);border:1px solid var(--border)">
+                                <div class="inline-flex items-center rounded-full px-3 py-1 mb-4 border text-[10px] font-mono uppercase tracking-[.18em]"
+                                    style="color:var(--pink);border-color:rgba(139,92,246,.3)">Voor bedrijven</div>
+                                <p class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--pink)">
+                                    Starter
+                                </p>
+                                <div class="font-display text-4xl mt-3 text-white">€900,-</div>
+                                <p class="text-sm font-light mt-3 leading-7" style="color:#888">Een strakke zakelijke
+                                    website met een duidelijke dienstenoverzicht, sterke intro en een eenvoudige weg
+                                    naar contact.</p>
+                                <ul class="mt-4 space-y-2 text-sm" style="color:#aaa">
+                                    <li>• 1–2 pagina's</li>
+                                    <li>• Scherpe zakelijke structuur</li>
+                                    <li>• Contact en duidelijke actieknop</li>
+                                </ul>
+                                <div class="mt-6 card-actions">
+                                    <a href="mailto:peter@peterhuisma.nl" class="btn-secondary">Contact →</a>
+                                </div>
+                            </div>
+
+                            <div class="reveal site-card p-8 rounded-3xl min-h-[340px] md:scale-[1.03] md:-translate-y-1"
+                                style="background:var(--card);border:1px solid rgba(139,92,246,.35);box-shadow:0 0 40px rgba(139,92,246,.12)">
+                                <div class="inline-flex items-center rounded-full px-3 py-1 mb-4 border text-[10px] font-mono uppercase tracking-[.18em]"
+                                    style="color:var(--pink);border-color:rgba(139,92,246,.3)">Meest compleet</div>
+                                <p class="font-mono text-[10px] tracking-widest uppercase" style="color:var(--pink)">
+                                    Growth
+                                </p>
+                                <div class="font-display text-5xl mt-3 text-white">€1100,-</div>
+                                <p class="text-sm font-light mt-3 leading-7" style="color:#888">Een complete website
+                                    voor bedrijven met meerdere secties, een sterke structuur, SEO en een
+                                    conversiegericht ontwerp.</p>
+                                <ul class="mt-4 space-y-2 text-sm" style="color:#aaa">
+                                    <li>• 3–5 pagina's</li>
+                                    <li>• SEO en snelle laadtijd</li>
+                                    <li>• Diensten, over ons en contact</li>
+                                </ul>
+                                <div class="mt-6 card-actions">
+                                    <a href="mailto:peter@peterhuisma.nl" class="btn-secondary">Contact →</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+        </section>
+
+        <div class="hr-fade mx-6 md:mx-12"></div>
+
+
+        <section id="work" class="py-32 px-6 md:px-12">
+            <div class="max-w-6xl mx-auto">
+
+                <div class="reveal flex items-end justify-between mb-16">
+                    <div>
+                        <p class="font-mono text-[11px] tracking-[.18em] mb-4" style="color:var(--pink)">003 — WERK</p>
+                        <h2 class="font-display text-6xl md:text-7xl leading-none">GESELECTEERDE<br>PROJECTEN</h2>
+                    </div>
+                    <span class="hidden md:block font-mono text-[10px] tracking-widest" style="color:var(--muted)">LIVE
+                        SITES</span>
                 </div>
 
 
-                <div class="reveal site-card">
-                    <a href="https://spelletje.peterhuisma.nl/" target="_blank" rel="noopener"
-                        class="card-link-overlay"></a>
-                    <div class="browser-bar">
-                        <div class="browser-dot" style="background:#ff5f57"></div>
-                        <div class="browser-dot" style="background:#febc2e"></div>
-                        <div class="browser-dot" style="background:#28c840"></div>
-                        <div class="browser-url">spelletje.peterhuisma.nl</div>
-                    </div>
-                    <div class="iframe-outer" data-scale-target>
-                        <iframe src="https://spelletje.peterhuisma.nl/" loading="lazy"
-                            title="Undercover Online"></iframe>
-                    </div>
-                    <div class="card-info">
-                        <div>
-                            <div class="flex gap-2 mb-3">
-                                <span class="badge">Web App</span>
-                                <span class="badge">Game</span>
-                            </div>
-                            <h3 class="font-display text-3xl text-white">UNDERCOVER</h3>
-                            <p class="text-sm font-light mt-1" style="color:var(--muted)">Online multiplayer party game
-                                — rooms, cards & real-time play.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+                    <div class="reveal md:col-span-2 site-card">
+                        <div class="browser-bar">
+                            <div class="browser-dot" style="background:#ff5f57"></div>
+                            <div class="browser-dot" style="background:#febc2e"></div>
+                            <div class="browser-dot" style="background:#28c840"></div>
+                            <div class="browser-url">inferno-guitars-project.netlify.app</div>
                         </div>
-                        <a href="https://spelletje.peterhuisma.nl/" target="_blank" rel="noopener" class="btn shrink-0"
-                            style="cursor:pointer">Visit →</a>
+
+                        <div class="iframe-outer" style="height:280px" data-scale-target>
+                            <iframe src="https://inferno-guitars-project.netlify.app/" loading="lazy"
+                                title="Inferno Guitars"></iframe>
+                        </div>
+
+                        <div class="card-info">
+                            <div>
+                                <div class="flex gap-2 mb-3">
+                                    <span class="badge">UI-ontwerp</span>
+                                    <span class="badge">Online winkel</span>
+                                </div>
+                                <h3 class="font-display text-3xl text-white">INFERNO GUITARS</h3>
+                                <p class="text-sm font-light mt-1" style="color:var(--muted)">Gitarenwinkelproject —
+                                    productpagina's, winkelwagen en een donkere, sterke sfeer.</p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="https://inferno-guitars-project.netlify.app/" target="_blank" rel="noopener"
+                                    class="btn shrink-0" style="cursor:pointer">Bezoeken →</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="reveal md:col-span-2 site-card">
+                        <div class="browser-bar">
+                            <div class="browser-dot" style="background:#ff5f57"></div>
+                            <div class="browser-dot" style="background:#febc2e"></div>
+                            <div class="browser-dot" style="background:#28c840"></div>
+                            <div class="browser-url">peterhuisma.nl</div>
+                        </div>
+                        <div class="iframe-outer" data-scale-target>
+                            <iframe src="https://peterhuisma.nl/" loading="lazy"
+                                title="Peter Huisma Portfolio"></iframe>
+                        </div>
+                        <div class="card-info">
+                            <div>
+                                <div class="flex gap-2 mb-3">
+                                    <span class="badge">Portfolio</span>
+                                    <span class="badge">Frontend</span>
+                                </div>
+                                <h3 class="font-display text-3xl text-white">PORTFOLIO V1</h3>
+                                <p class="text-sm font-light mt-1" style="color:var(--muted)">Mijn originele
+                                    persoonlijke portfoliowebsite.</p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="https://peterhuisma.nl/" target="_blank" rel="noopener" class="btn shrink-0"
+                                    style="cursor:pointer">Bezoeken →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="hr-fade mx-6 md:mx-12"></div>
+        <div class="hr-fade mx-6 md:mx-12"></div>
 
 
-    <section id="contact" class="py-40 px-6 md:px-12 text-center">
-        <div class="reveal max-w-3xl mx-auto">
-            <p class="font-mono text-[11px] tracking-[.18em] mb-8" style="color:var(--pink)">004 — CONTACT</p>
-            <h2 class="font-display leading-none mb-6" style="font-size:clamp(64px,12vw,160px)">
-                LET'S<br><span class="text-glow" style="color:var(--pink)">TALK</span>
-            </h2>
-            <p class="text-sm font-light mb-12 leading-8" style="color:var(--muted)">
-                Interested in working together, have a project in mind,<br class="hidden md:block">or just want to say
-                hi? My inbox is open.
-            </p>
-            <a href="mailto:peter@peterhuisma.nl" class="btn"
-                style="padding:14px 40px;font-size:12px;cursor:pointer">Get
-                in touch →</a>
-            <div class="mt-20 flex justify-center gap-8 font-mono text-[10px] tracking-widest"
-                style="color:var(--muted)">
-                <a href="https://www.instagram.com/pxtr_2/" class="hover:text-white transition-colors"
-                    style="text-decoration:none">Instagram</a>
-                <a href="https://www.linkedin.com/in/peter-huisma-335a3339b/" class="hover:text-white transition-colors"
-                    style="text-decoration:none">LinkedIn</a>
+        <section id="contact" class="py-40 px-6 md:px-12 text-center">
+            <div class="reveal max-w-3xl mx-auto">
+                <p class="font-mono text-[11px] tracking-[.18em] mb-8" style="color:var(--pink)">004 — CONTACT</p>
+                <h2 class="font-display leading-none mb-6" style="font-size:clamp(64px,12vw,160px)">
+                    LATEN WE<br><span class="text-glow" style="color:var(--pink)">PRATEN</span>
+                </h2>
+                <p class="text-sm font-light mb-12 leading-8" style="color:var(--muted)">
+                    Ben je geïnteresseerd in samenwerking, heb je een project in gedachten,<br
+                        class="hidden md:block">of wil je gewoon even hallo zeggen? Mijn inbox staat open.
+                </p>
+                <a href="mailto:peter@peterhuisma.nl" class="btn"
+                    style="padding:14px 40px;font-size:12px;cursor:pointer">Neem contact op →</a>
+                <div class="mt-20 flex justify-center gap-8 font-mono text-[10px] tracking-widest"
+                    style="color:var(--muted)">
+                    <a href="https://www.linkedin.com/in/peter-huisma-335a3339b/"
+                        class="hover:text-white transition-colors" style="text-decoration:none">LinkedIn</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
 
-    <footer
-        class="px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] tracking-widest"
-        style="color:#444;border-top:1px solid var(--border)">
-        <span>© 2026 PETER. ALL RIGHTS RESERVED.</span>
-        <span style="color:var(--pink)">@PXTR_2</span>
-    </footer>
+        <footer
+            class="px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] tracking-widest"
+            style="color:#444;border-top:1px solid var(--border)">
+            <span>© 2026 PETER. ALL RIGHTS RESERVED.</span>
+            <div class="flex items-center gap-4">
+                <a href="/admin.php" class="hover:text-white transition-colors" style="text-decoration:none">Admin</a>
+            </div>
+        </footer>
 
+
+    </main>
 
     <script>
         const cur = document.getElementById('cur');
         const ring = document.getElementById('ring');
         let mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        const ease = 0.16;
+
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX;
+            my = e.clientY;
+        });
+
+        document.addEventListener('mousedown', () => {
+            ring.style.width = '22px';
+            ring.style.height = '22px';
+            ring.style.opacity = '0.9';
+        });
+
+        document.addEventListener('mouseup', () => {
+            ring.style.width = '34px';
+            ring.style.height = '34px';
+            ring.style.opacity = '0.55';
+        });
+
         (function loop() {
-            rx += (mx - rx) * .12; ry += (my - ry) * .12;
-            cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-            ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+            rx += (mx - rx) * ease;
+            ry += (my - ry) * ease;
+            cur.style.left = mx + 'px';
+            cur.style.top = my + 'px';
+            ring.style.left = rx + 'px';
+            ring.style.top = ry + 'px';
             requestAnimationFrame(loop);
         })();
 
@@ -586,12 +994,71 @@
             const open = mobMenu.classList.toggle('open');
             icoOpen.classList.toggle('hidden', open);
             icoClose.classList.toggle('hidden', !open);
+            ham.setAttribute('aria-expanded', String(open));
+            mobMenu.setAttribute('aria-hidden', String(!open));
         });
         mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
             mobMenu.classList.remove('open');
             icoOpen.classList.remove('hidden');
             icoClose.classList.add('hidden');
+            ham.setAttribute('aria-expanded', 'false');
+            mobMenu.setAttribute('aria-hidden', 'true');
         }));
+
+        document.querySelectorAll('input[name="website-type"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                const target = radio.value;
+                document.querySelectorAll('.pricing-card-group').forEach(group => {
+                    group.classList.toggle('is-active', group.id === `pricing-${target}`);
+                });
+            });
+        });
+
+        const availabilityKey = 'peter-availability-state';
+        const defaultAvailability = {
+            available: true,
+            heading: 'Beschikbaar voor nieuwe projecten',
+            description: 'Open voor freelance-opdrachten, portfolio\'s en moderne zakelijke websites.',
+            label: 'Nu beschikbaar'
+        };
+
+        async function fetchAvailabilityState() {
+            try {
+                const response = await fetch('/admin.php?state=1');
+                if (!response.ok) return defaultAvailability;
+                const data = await response.json();
+                return data && typeof data === 'object' ? { ...defaultAvailability, ...data } : defaultAvailability;
+            } catch (error) {
+                console.warn('Kon beschikbaarheidsstatus niet laden:', error);
+                return defaultAvailability;
+            }
+        }
+
+        function applyAvailabilityState(state) {
+            const card = document.getElementById('availability-card');
+            const heading = document.getElementById('availability-heading');
+            const description = document.getElementById('availability-description');
+            const label = document.getElementById('availability-label');
+
+            if (!card || !heading || !description || !label) return;
+
+            const dot = document.getElementById('availability-dot');
+
+            card.classList.remove('available', 'unavailable');
+            card.classList.add(state.available ? 'available' : 'unavailable');
+            heading.textContent = state.heading || defaultAvailability.heading;
+            description.textContent = state.description || defaultAvailability.description;
+            label.textContent = state.label || (state.available ? defaultAvailability.label : 'Momenteel niet beschikbaar');
+            label.style.color = state.available ? '#4ade80' : '#f87171';
+            if (dot) {
+                dot.style.background = state.available ? '#22c55e' : '#ef4444';
+            }
+        }
+
+        (async () => {
+            const state = await fetchAvailabilityState();
+            applyAvailabilityState(state);
+        })();
 
         const revealObs = new IntersectionObserver(entries => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });

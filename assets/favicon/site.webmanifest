@@ -1,0 +1,15 @@
+{
+    "name": "Peter Huisma",
+    "short_name": "Peter",
+    "icons": [
+        {
+            "src": "/assets/favicon/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ],
+    "theme_color": "#080808",
+    "background_color": "#080808",
+    "display": "standalone"
+}
